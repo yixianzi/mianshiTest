@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .p {
+      position: relative;
+      background-color: darkgray;
+      width: 200px;
+      height: 200px;
+      transform: scale(1);
+    }
+    .f {
+      position: absolute;
+      background-color: salmon;
+      width: 10px;
+      height: 10px;
+    }
+  </style>
+  <body>
+    <div class="p">
+      <div class="f" id="q"></div>
+    </div>
+  </body>
+  <script>
+    const q = document.querySelector(".f");
+    function y(x, h) {
+      return (x * x) / h;
+    }
+    let top1 = 0;
+    let left1 = 0;
+    function f() {
+      left1 += 2;
+      if (left1 >= 200) left1 = 0;
+
+      top1 = y(left1, 200);
+      q.style.top = top1 + "px";
+      q.style.left = left1 + "px";
+      requestAnimationFrame(f);
+    }
+    f();
+
+    // function f() {
+    //   left1 += 2;
+    //   if (left1 >= 200) left1 = 0;
+    //   top1 = y(left1, 200);
+    //   q.style.transform = `translate(${left1}px,${top1}px)`;
+    //   requestAnimationFrame(f);
+    // }
+    // f();
+  </script>
+</html>

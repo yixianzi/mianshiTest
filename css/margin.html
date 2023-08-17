@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .t {
+      width: 300px;
+      height: 300px;
+    }
+    .t1 {
+      background-color: gold;
+      /* margin-top: -20px; */
+      /* 负的right和bootom不改变本身的位置，但会改变css自身的计算位置，使得相邻元素移动 */
+      margin-bottom: -100px;
+    }
+    .t2 {
+      background-color: darkseagreen;
+    }
+  </style>
+  <body>
+    <div class="t1 t">1</div>
+    <div class="t2 t">1</div>
+  </body>
+</html>

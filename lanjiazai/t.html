@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    img {
+      height: 600px;
+      width: 100%;
+    }
+  </style>
+  <body>
+    <img src="./img/default.png" data-src="./img/1.png" />
+    <img src="./img/default.png" data-src="./img/2.png" />
+    <img src="./img/default.png" data-src="./img/3.png" />
+    <img src="./img/default.png" data-src="./img/4.png" />
+    <img src="./img/default.png" data-src="./img/5.png" />
+    <img src="./img/default.png" data-src="./img/6.png" />
+    <img src="./img/default.png" data-src="./img/7.png" />
+    <!-- <img src="./img/default.png" data-src="./img/8.png" /> -->
+  </body>
+</html>
+<script>
+  function lazyload() {
+    let viewHeight = document.documentElement.clientHeight; // 读取可视区高度
+    console.log(viewHeight);
+    let imgs = document.querySelectorAll("img[data-src]");
+    imgs.forEach((item, index) => {
+      if (item.dataset.src === "") return;
+
+      // 用于获得页面中某个元素的左，上，右和下分别相对浏览器视窗的位置
+      let rect = item.getBoundingClientRect();
+      if (rect.bottom >= 0 && rect.top < viewHeight) {
+        console.log(index, rect, viewHeight);
+        item.src = item.dataset.src;
+        item.removeAttribute("data-src");
+      }
+    });
+  }
+
+  function throttle(fn, delay) {
+    let pre = new Date(0).getTime();
+    let timer = null;
+    return function () {
+      let context = this;
+      let now = new Date().getTime();
+      const args = [...arguments];
+      if (now - pre > delay) {
+        fn.apply(context, args);
+        pre = now;
+      }
+    };
+  }
+  window.addEventListener("scroll", throttle(lazyload, 200));
+</script>
