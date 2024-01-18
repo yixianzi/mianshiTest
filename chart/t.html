@@ -1,0 +1,102 @@
+<style>
+  .e-flip-a {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    overflow: hidden;
+    height: 8vh;
+  }
+  .e-flip-a .nums {
+    position: relative;
+    display: inline-block;
+    width: 2.65625vw;
+    margin: 0 1px;
+  }
+  .e-flip-a .nums li {
+    position: relative;
+    font-size: 3.125vw;
+    text-align: center;
+    font-weight: bold;
+    border: 1px solid #3c5fc7;
+    box-shadow: 0 0 1.04166667vw #3c74c7 inset;
+    background-color: rgba(60, 95, 199, 0.1);
+    box-sizing: border-box;
+    height: 8vh;
+    line-height: 8vh;
+  }
+  .e-flip-a .nums:nth-last-child(3n) {
+    margin-left: 1.35416667vw;
+  }
+  .e-flip-a .nums:first-child {
+    margin-left: 0;
+  }
+  .e-flip-a .nums:nth-last-child(3n) li:before {
+    content: ",";
+    position: absolute;
+    bottom: 0;
+    left: -1.25vw;
+    font-size: 2.60416667vw;
+    width: 1.35416667vw;
+    font-family: "FZZYJW", "微软雅黑";
+  }
+  .e-flip-a .nums:nth-child(1) li:before {
+    content: "";
+  }
+</style>
+<html>
+  <div class="e-flip-a" id="flip1"></div>
+</html>
+<script>
+  saveHtml("flip1"); //这个用法用于保存html结构,因为调用js方法后，里面html结构就变调了
+  flip_a("flip1", 9999999, 8);
+  function flip_a(id, num, height) {
+    //id:绑定该效果的元素id 	num:第一次展示的数值	height:数字框高度
+    _this = this;
+    this.flipNum = function (id, num, height) {
+      var str = num + "";
+      var len = str.length;
+      var arr1 = [];
+      var arr2 = [];
+      if ($("#" + id).attr("num")) {
+        var oldNum = $("#" + id).attr("num") + "";
+      } else {
+        var oldNum = 0 + "";
+      }
+      $("#" + id).attr("num", num);
+      $("#" + id).html("");
+      for (var i = 0; i < len; i++) {
+        arr1.push(str[i]);
+        arr2.push(oldNum[i]);
+        $("#" + id).append(
+          '<ul class="nums" style="">' +
+            "<li>0</li> <li>1</li> <li>2</li> <li>3</li> <li>4</li> <li>5</li> <li>6</li> <li>7</li> <li>8</li> <li>9</li>" +
+            "</ul>"
+        );
+      }
+      for (var i = 0; i < len; i++) {
+        if (arr1[i] == arr2[i]) {
+          $("#" + id)
+            .find(".nums")
+            .eq(i)
+            .css({
+              top: -arr1[i] * height + "vh",
+            });
+        } else {
+          $("#" + id)
+            .find(".nums")
+            .eq(i)
+            .animate(
+              {
+                top: -arr1[i] * height + "vh",
+              },
+              650
+            );
+        }
+      }
+    };
+    this.flipNum(id, num, height);
+    setInterval(function () {
+      _this.flipNum(id, parseInt(Math.random() * num), height);
+    }, 3000);
+  }
+</script>

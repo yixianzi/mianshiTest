@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="./dist/umd/index.min.js"></script>
+    <script>
+      window.safemonitor = new SafeMonitorSDK("http://test:3000/monitor", {
+        productId: "test",
+        userInfo: "test",
+        platform: "vue",
+      });
+      // @ts-ignore
+      window.safemonitor.init();
+      window.onload = () => {
+        const btn = document.getElementById("btn");
+        btn.onclick = () => {
+          const data = JSON.stringify({
+            test: "1232",
+          });
+          const blob = new Blob([JSON.stringify(data)], {
+            type: "application/json; charset=UTF-8",
+          });
+          navigator.sendBeacon("/sad", blob);
+        };
+      };
+    </script>
+  </head>
+  <body>
+    <button id="btn">点击</button>
+  </body>
+</html>
