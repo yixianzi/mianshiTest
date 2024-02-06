@@ -26,4 +26,5 @@ var lengthOfLIS = function (nums) {
   return tail.length;
 };
 
-lengthOfLIS([10, 9, 2, 5, 3, 7, 101, 4, 8, 9]);
+const a = lengthOfLIS([10, 9, 2, 5, 3, 7, 101, 4, 8, 9]);
+console.log(a);
