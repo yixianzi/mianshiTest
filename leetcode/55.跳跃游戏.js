@@ -16,6 +16,8 @@ var canJump = function (nums) {
     if (maxIndex >= length - 1) return true;
     if (maxIndex >= i) {
       maxIndex = Math.max(maxIndex, i + nums[i]);
+    } else {
+      return false;
     }
   }
   return false;
